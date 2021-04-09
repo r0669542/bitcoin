@@ -23,3 +23,7 @@
 
 ## Install bs4-package
   pip3 install bs4
+  
+## Get Mongodb running
+
+## Install pymongo
