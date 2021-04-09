@@ -17,3 +17,9 @@
   Allow the process to complete and verify the Python version was installed sucessfully::
 
   python ––version
+
+## Install PIP
+  sudo apt-get install python3-pip
+
+## Install bs4-package
+  pip3 install bs4
