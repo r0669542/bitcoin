@@ -4,6 +4,8 @@ import requests
 
 lijst = []
 teller = 0
+mostvaluable = []
+
 def scrape():
     url = 'https://www.blockchain.com/btc/unconfirmed-transactions'
     r = requests.get(url)
@@ -34,8 +36,10 @@ def highest_value(transacties):
     for item in transacties:
         if maxi in item[2]:
             print(item)
+            mostvaluable.append(item)
             break
-    lijst.clear()        
+    lijst.clear() 
+    return mostvaluable
     
 while True:
     while teller < 6:
