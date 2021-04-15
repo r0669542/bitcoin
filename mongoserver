@@ -1,0 +1,17 @@
+import pymongo as mongo
+from datetime import datetime
+
+def insert(json_dump):
+    client = mongo.MongoClient("mongodb://127.0.0.1:27017")
+    bitcoin_db = client["bitcoin_db"]
+    
+    timenow = datetime.now()
+    timestamp = timenow.strftime("%d_%m_%Y")
+    print(timestamp)
+
+    collist = bitcoin_db.list_collection_names()
+    
+    col = bitcoin_db[timestamp]
+    
+        
+    x = col.insert_one(json_dump)
