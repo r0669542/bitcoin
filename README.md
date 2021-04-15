@@ -29,7 +29,7 @@
 ## Install pymongo
 
 ## Install Redis
-  wget http://download.redis.io/redis -stable.tar.gz
+  wget http://download.redis.io/redis-stable.tar.gz
   
   tar xvzf redis -stable.tar.gz
   
