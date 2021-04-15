@@ -29,9 +29,24 @@
 ## Install pymongo
 
 ## Install Redis
-  $wget http://download.redis.io/redis -stable.tar.gz
-  $tar xvzf redis -stable.tar.gz
-  $cd redis -stable
-  $make
-  $make test
+  wget http://download.redis.io/redis -stable.tar.gz
+  
+  tar xvzf redis -stable.tar.gz
+  
+  cd redis -stable
+  
+  make
+  
+  make test
 
+## Start Redis
+  cd src
+  
+  redis-server
+  
+  sudo apt install redis-server
+  
+  redis-cli ping
+  
+## Download Redis for Python
+  python3 -m pip install redis
