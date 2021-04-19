@@ -9,7 +9,7 @@ mostvaluable = []
 def scrape():
     url = 'https://www.blockchain.com/btc/unconfirmed-transactions'
     r = requests.get(url)
-    soup = BeautifulSoup(r.text)
+    soup = BeautifulSoup(r.text,"html.parser")
 
     div = soup.find_all('div',{ "class" : "sc-1g6z4xm-0 hXyplo" })         
         
