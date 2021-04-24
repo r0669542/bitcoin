@@ -50,3 +50,4 @@
   
 ## Download Redis for Python
   python3 -m pip install redis
+![image](https://user-images.githubusercontent.com/75485813/115957854-28088a80-a505-11eb-823c-6547ae5b8f40.png)
