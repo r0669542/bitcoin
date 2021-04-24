@@ -1,0 +1,45 @@
+import mongoserver
+import scraper2
+import time
+import redis
+import json
+
+re = redis.Redis()
+teller = 0
+
+while True:
+    while teller < 6:
+        scraper2.scrape()
+        teller += 1
+        print("scrape")
+        time.sleep(9)
+    teller = 0
+    
+    maxi = float(0)
+    for key in re.keys():
+        data = json.loads(re.get(key).decode('utf-8'))
+        bitcoin = data["BTC"].replace(" BTC","")
+        bitcoin = float(bitcoin)
+        
+        if bitcoin > maxi:
+            maxi = bitcoin
+            
+    maxi = str(maxi)
+    for key in re.keys():
+        data = json.loads(re.get(key).decode('utf-8'))
+        if maxi in data["BTC"]:
+            json_data = {}
+            json_data[key.decode('utf-8')] = []
+            json_data[key.decode('utf-8')].append({
+                "Time":data["Time"],
+                "BTC":data["BTC"],
+                "USD":data["USD"]
+            })
+            print(json_data)
+            with open('data.json','w') as f:
+                json.dump(json_data,f)
+            with open('data.json') as j:
+                json_file = json.load(j)
+            mongoserver.insert(json_file)
+            break        
+    re.flushdb()
