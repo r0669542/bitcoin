@@ -1,0 +1,26 @@
+import time
+from bs4 import BeautifulSoup
+from datetime import datetime
+import requests
+import json
+import redis 
+
+def scrape():
+    url = 'https://www.blockchain.com/btc/unconfirmed-transactions'
+    r = requests.get(url)
+    re = redis.Redis()
+    
+    soup = BeautifulSoup(r.text,"html.parser")
+
+    div = soup.find_all('div',{ "class" : "sc-1g6z4xm-0 hXyplo" })         
+        
+    for a in div:
+        hashes = a.find('a',{"class" : "sc-1r996ns-0 fLwyDF sc-1tbyx6t-1 kCGMTY iklhnl-0 eEewhk d53qjk-0 ctEFcK"})
+        info = a.find_all('span',{"class" : "sc-1ryi78w-0 cILyoi sc-16b9dsl-1 ZwupP u3ufsr-0 eQTRKC"})
+        
+        record=[hashes.get_text(),info[0].get_text(),info[1].get_text(),info[2].get_text()]
+        
+        #lijst.append(record)
+        
+        json_ele = {"Time":record[1],"BTC":record[2],"USD":record[3]}
+        re.set(record[0], json.dumps(json_ele))
